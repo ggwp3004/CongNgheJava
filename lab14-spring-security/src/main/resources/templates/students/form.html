@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Them / Sua sinh vien</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<div class="container">
+    <h1 th:if="${student.id} == null">Them sinh vien</h1>
+    <h1 th:if="${student.id} != null">Sua sinh vien</h1>
+
+    <form class="student-form"
+          th:action="${student.id} == null ? @{/students/create} : @{'/students/edit/' + ${student.id}}"
+          th:object="${student}" method="post">
+
+        <label>Ho ten</label>
+        <input type="text" th:field="*{name}" required="required">
+
+        <label>Lop</label>
+        <input type="text" th:field="*{className}" required="required">
+
+        <label>Tuoi</label>
+        <input type="number" th:field="*{age}" required="required">
+
+        <button type="submit">Luu</button>
+        <a th:href="@{/students}" class="btn btn-secondary">Huy</a>
+    </form>
+</div>
+</body>
+</html>

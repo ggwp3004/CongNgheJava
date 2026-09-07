@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dang nhap - Lab14 Spring Security</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="login-wrapper">
+    <form class="login-box" th:action="@{/login}" method="post">
+        <h2>Dang nhap he thong</h2>
+
+        <p th:if="${param.error}" class="alert alert-error">
+            Sai ten dang nhap hoac mat khau!
+        </p>
+        <p th:if="${param.logout}" class="alert alert-success">
+            Ban da dang xuat thanh cong.
+        </p>
+
+        <label for="username">Ten dang nhap</label>
+        <input type="text" id="username" name="username" autofocus="autofocus">
+
+        <label for="password">Mat khau</label>
+        <input type="password" id="password" name="password">
+
+        <button type="submit">Dang nhap</button>
+
+        <div class="hint">
+            Tai khoan demo: <b>admin/123456</b> (ADMIN) hoac <b>user/123456</b> (USER)
+        </div>
+        <a class="back-link" th:href="@{/}">&larr; Ve trang chu</a>
+    </form>
+</div>
+</body>
+</html>

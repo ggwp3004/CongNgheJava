@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sach sinh vien</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<div class="container">
+    <h1>Danh sach sinh vien</h1>
+
+    <!-- Bai 5: chi ADMIN thay nut them sinh vien -->
+    <div sec:authorize="hasRole('ADMIN')" class="toolbar">
+        <a th:href="@{/students/create}" class="btn">+ Them sinh vien</a>
+    </div>
+
+    <table class="data-table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Ho ten</th>
+            <th>Lop</th>
+            <th>Tuoi</th>
+            <!-- Bai 9: cot thao tac chi hien voi ADMIN -->
+            <th sec:authorize="hasRole('ADMIN')">Thao tac</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="s : ${students}">
+            <td th:text="${s.id}"></td>
+            <td th:text="${s.name}"></td>
+            <td th:text="${s.className}"></td>
+            <td th:text="${s.age}"></td>
+            <td sec:authorize="hasRole('ADMIN')">
+                <a th:href="@{'/students/edit/' + ${s.id}}" class="link-edit">Sua</a>
+                <form th:action="@{'/students/delete/' + ${s.id}}" method="post" class="inline-form"
+                      onsubmit="return confirm('Xoa sinh vien nay?');">
+                    <button type="submit" class="link-delete">Xoa</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p sec:authorize="hasRole('USER')" class="note">
+        Ban dang dang nhap voi vai tro USER nen chi co the xem danh sach,
+        khong the them / sua / xoa sinh vien.
+    </p>
+</div>
+</body>
+</html>

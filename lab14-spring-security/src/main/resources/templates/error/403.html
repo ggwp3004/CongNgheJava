@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>403 - Khong co quyen truy cap</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<div class="container error-page">
+    <h1>403</h1>
+    <h2>Ban khong co quyen truy cap chuc nang nay</h2>
+    <p>
+        Tai khoan <b sec:authorize="isAuthenticated()" sec:authentication="name">?</b>
+        khong du quyen (role) de xem trang nay. Vui long lien he quan tri vien
+        neu ban cho rang day la nham lan.
+    </p>
+    <a th:href="@{/students}" class="btn">Ve trang Sinh vien</a>
+    <a th:href="@{/}" class="btn btn-secondary">Ve trang chu</a>
+</div>
+</body>
+</html>

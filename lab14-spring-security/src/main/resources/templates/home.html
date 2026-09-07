@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Trang chu - Lab14 Spring Security</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<div class="container">
+    <h1>Lab 14 - Bao mat ung dung voi Spring Security</h1>
+    <p>Chuong 4: Phat trien ung dung voi Spring Framework - Cong nghe Java (IT3242)</p>
+
+    <ul>
+        <li>Trang nay (<code>/</code>) va <a th:href="@{/about}">/about</a> la trang cong khai (permitAll).</li>
+        <li><a th:href="@{/students}">/students</a> can dang nhap (ADMIN hoac USER).</li>
+        <li><a th:href="@{/courses}">/courses</a> chi danh cho ADMIN (Bai 6).</li>
+    </ul>
+
+    <div sec:authorize="!isAuthenticated()">
+        <a th:href="@{/login}" class="btn">Dang nhap ngay</a>
+    </div>
+</div>
+</body>
+</html>

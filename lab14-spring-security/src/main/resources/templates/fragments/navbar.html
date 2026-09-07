@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="navbar">
+    <nav class="navbar">
+        <div class="brand"><a th:href="@{/}">Lab14 - Spring Security</a></div>
+        <div class="links">
+            <a th:href="@{/}">Trang chu</a>
+            <a th:href="@{/about}">Gioi thieu</a>
+
+            <!-- ADMIN + USER deu xem duoc danh sach sinh vien -->
+            <a sec:authorize="isAuthenticated()" th:href="@{/students}">Sinh vien</a>
+
+            <!-- Bai 8: chi ADMIN thay menu Hoc phan -->
+            <a sec:authorize="hasRole('ADMIN')" th:href="@{/courses}">Hoc phan (ADMIN)</a>
+        </div>
+
+        <div class="user-box">
+            <!-- Chua dang nhap -->
+            <a sec:authorize="!isAuthenticated()" th:href="@{/login}" class="btn-login">Dang nhap</a>
+
+            <!-- Da dang nhap: hien ten + vai tro + nut dang xuat (Bai 5) -->
+            <span sec:authorize="isAuthenticated()">
+                Xin chao, <b sec:authentication="name">user</b>
+                <span sec:authorize="hasRole('ADMIN')" class="badge badge-admin">ADMIN</span>
+                <span sec:authorize="hasRole('USER')" class="badge badge-user">USER</span>
+                <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post" class="logout-form">
+                    <button type="submit" class="btn-logout">Dang xuat</button>
+                </form>
+            </span>
+        </div>
+    </nav>
+</div>
+</body>
+</html>

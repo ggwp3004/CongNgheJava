@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sach hoc phan (ADMIN)</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<div class="container">
+    <h1>Danh sach hoc phan</h1>
+    <p class="note">Trang nay (/courses) chi ADMIN moi truy cap duoc (Bai 6).</p>
+
+    <table class="data-table">
+        <thead>
+        <tr>
+            <th>Ma HP</th>
+            <th>Ten hoc phan</th>
+            <th>So tin chi</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="c : ${courses}">
+            <td th:text="${c.code}"></td>
+            <td th:text="${c.name}"></td>
+            <td th:text="${c.credit}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
